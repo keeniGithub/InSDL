@@ -6,6 +6,15 @@
 
 ## Создать проект
 
+### Перед началось отредактируйте путь в `main.py`
+```python
+from_path = 'Z:/cpp/engine' # что будет копироваться (путь к этой папке)
+to_path = 'Z:/cpp/' # в какую папку будут создаваться проекты
+# ПУТЬ К to_path ОБЯЗАТЕЛЬНО УКАЗЫВАТЬ С / НА КОНЦЕ! либо отредактируйте create/project.py
+```
+
+---
+
 ```sh
 $ insdl create PROJECT_NAME -flag # если переместить create/insdl.bat в папку с перменными среды, к примеру C:/Windows
 ```
@@ -13,7 +22,7 @@ $ insdl create PROJECT_NAME -flag # если переместить create/insdl
 или 
 
 ```sh
-$ create.bat
+$ .\create.bat
 ```
 
 или 

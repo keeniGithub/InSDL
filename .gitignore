@@ -1,4 +1,3 @@
-/.vscode
 /include/SDL3
 *.exe
 /src/build
