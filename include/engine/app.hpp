@@ -4,14 +4,24 @@
 #include <string>
 #include <iostream>
 #include <SDL3/SDL.h>
+#include <map>
+#include <functional>
+#include <vector>
 
 using namespace std;
 
 class app {
+    private:
+        struct bindStruct {
+            SDL_Scancode key;
+            function<void()> func;
+        };
+
     public:
         SDL_Window *myWindow;
         SDL_Surface *myWindowSurface;
         bool quit = false;
+        vector<bindStruct> keyBindings;
 
         void init(int width, int height, string name) {
             SDL_Init(SDL_INIT_VIDEO);
@@ -57,6 +67,11 @@ class app {
         
             SDL_SetWindowSize(myWindow, width, height);
             if (!name.empty()) SDL_SetWindowTitle(myWindow, name.c_str());
+        }
+
+        template<typename Func>
+        void bindKey(SDL_Scancode key, Func func) {
+            keyBindings.push_back({ key, func });
         }
 };
 
