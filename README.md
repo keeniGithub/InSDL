@@ -8,15 +8,14 @@
 
 ### Перед началось отредактируйте путь в `main.py`
 ```python
-from_path = 'Z:/cpp/engine' # что будет копироваться (путь к этой папке)
-to_path = 'Z:/cpp/' # в какую папку будут создаваться проекты
-# ПУТЬ К to_path ОБЯЗАТЕЛЬНО УКАЗЫВАТЬ С / НА КОНЦЕ! либо отредактируйте create/project.py
+from_path = '' # что будет копироваться (путь к этой папке)
+to_path = '' # в какую папку будут создаваться проекты
 ```
 
 ---
 
 ```sh
-$ insdl create PROJECT_NAME -flag # если переместить create/insdl.bat в папку с перменными среды, к примеру C:/Windows
+$ insdl create PROJECT_NAME -flag # способ работает запустить файл в папке create с insdl.bat 
 ```
 
 или 
@@ -38,10 +37,28 @@ $ python main.py create PROJECT_NAME -flag
 ### Удалить проект
 
 ```sh
-$ insdl del PROJECT_NAME # если переместить create/insdl.bat в папку с перменными среды, к примеру C:/Windows
+$ insdl del PROJECT_NAME # способ работает запустить файл в папке create с insdl.bat 
 ```
 
-ну и все способы сверху
+или 
+
+```sh
+$ python main.py del PROJECT_NAME
+```
+
+### Скомпилировать
+
+```sh
+$ insdl compile PROJECT_NAME # способ работает запустить файл в папке create с insdl.bat 
+```
+
+или 
+
+```sh
+$ python main.py compile PROJECT_NAME
+```
+
+или запустите `compiler.bat`
 
 # Документация
 

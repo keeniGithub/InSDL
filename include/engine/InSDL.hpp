@@ -5,6 +5,6 @@
 #include <event.hpp>
 #include <rect.hpp>
 #include <delay.hpp>
-#include <SDL3/SDL.h>
+#include <SDL3/SDL_scancode.h>
 
 #endif

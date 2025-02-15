@@ -1,15 +1,22 @@
 import argparse
+import os
+import main as main_file
 from create.project import create, delete
 
+path = main_file.to_path
+
 def main():
-    parser = argparse.ArgumentParser(description="Команда для создания проекта на InSDL")
-    parser.add_argument('command', choices=['create', 'del'], help='Команда для выполнения')
-    parser.add_argument('folder_name', type=str, help='Название папки для проекта')
-    parser.add_argument('-vsc', action='store_true', help='Добавить папку .vscode')
+    parser = argparse.ArgumentParser(description="Create InSDL project")
+    parser.add_argument('command', choices=['create', 'compile', 'del'], help='Command')
+    parser.add_argument('name', type=str, help='Project name')
+    parser.add_argument('-vsc', action='store_true', help='add .vscode folder')
 
     args = parser.parse_args()
 
     if args.command == 'create':
-        create(args.folder_name, keep_vscode=args.vsc)
+        create(args.name, keep_vscode=args.vsc)
     elif args.command == 'del':
-        delete(args.folder_name)
+        delete(args.name)
+    elif args.command == 'compile':
+        os.system(f"cd {path}/{args.name}")
+        os.system(f".\compiler.bat")

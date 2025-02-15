@@ -1,3 +1,3 @@
 @echo off
 
-python Z:\cpp\engine\create\main.py %*
+python %~d0\cpp\engine\main.py %*
