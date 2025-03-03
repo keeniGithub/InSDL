@@ -6,6 +6,7 @@
 
 using namespace std;
 
+/* only for processing the exit */
 void exitEvent(app& app) {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
@@ -15,6 +16,7 @@ void exitEvent(app& app) {
     }
 }
 
+/* to process everything */
 void handleEvent(app& app) {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
@@ -22,7 +24,7 @@ void handleEvent(app& app) {
             app.quit = true;
         } 
         else if (event.type == SDL_EVENT_KEY_DOWN) {
-            SDL_Scancode scancode = event.key.keysym.scancode;
+            SDL_Scancode scancode = event.key.scancode;
             for (auto& binding : app.keyBindings) {
                 if (binding.key == scancode) {
                     binding.func();

@@ -10,11 +10,12 @@ def main():
     parser.add_argument('command', choices=['create', 'compile', 'del'], help='Command')
     parser.add_argument('name', type=str, help='Project name')
     parser.add_argument('-vsc', action='store_true', help='add .vscode folder')
+    parser.add_argument('-bat', action='store_true', help='add compile.bat file')
 
     args = parser.parse_args()
 
     if args.command == 'create':
-        create(args.name, keep_vscode=args.vsc)
+        create(args.name, keep_vscode=args.vsc, keep_batch=args.bat)
     elif args.command == 'del':
         delete(args.name)
     elif args.command == 'compile':

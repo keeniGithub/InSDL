@@ -7,8 +7,10 @@ int main()
 
     while (!myapp.quit) {
         handleEvent(myapp);
-
+        
         // code here
+
+        myapp.update();
     }
 
     myapp.destroy();

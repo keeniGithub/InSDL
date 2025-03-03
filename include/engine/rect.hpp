@@ -6,15 +6,23 @@
 
 using namespace std;
 
-/**
- * @brief Класс для создания нового rect`a в SDL
- * @param x pos x
- * @param y pos y
- * @param w width
- * @param h height
-**/
 class rect {
+    private:
+        struct rectData {
+            SDL_Rect rect;
+        };
+
+        struct colorStruct {
+            Uint8 r = 0;
+            Uint8 g = 0;
+            Uint8 b = 0;
+        };
+
+        rectData data;
+
     public:
+        colorStruct color;
+
         rect(int x = 0, int y = 0, int w = 0, int h = 0) {
             data.rect.x = x;
             data.rect.y = y;
@@ -44,13 +52,37 @@ class rect {
         void setWidth(int w){ data.rect.w = w; }
         void setHeight(int h){ data.rect.h = h; }
 
+        void addX(int x){ data.rect.x += x; }
+        void addY(int y){ data.rect.y += y; }
+        void addWidth(int w){ data.rect.w += w; }
+        void addHeight(int h){ data.rect.h += h; }
+
+        void subX(int x){ data.rect.x -= x; }
+        void subY(int y){ data.rect.y -= y; }
+        void subWidth(int w){ data.rect.w -= w; }
+        void subHeight(int h){ data.rect.h -= h; }
+
         int getX(){ return data.rect.x; }
         int getY(){ return data.rect.y; }
         int getWidth(){ return data.rect.w; }
         int getHeight(){ return data.rect.h; }
 
-        SDL_Rect get() const {
+        SDL_Rect get() {
             return data.rect;
+        }
+
+        void fill(SDL_Surface *surface, Uint8 r = -1, Uint8 g = -1, Uint8 b = -1) {
+            if (r == -1) r = color.r;
+            else color.r = r;
+            if (g == -1) g = color.g;
+            else color.g = g;
+            if (b == -1) b = color.b;
+            else color.b = b;
+            SDL_FillSurfaceRect(surface, &data.rect, SDL_MapSurfaceRGB(surface, r, g, b));
+        }
+
+        void update(SDL_Surface *surface) {
+            SDL_FillSurfaceRect(surface, &data.rect, SDL_MapSurfaceRGB(surface, color.r, color.g, color.b));
         }
 
         friend ostream& operator<<(ostream& os, rect& r) {
@@ -58,13 +90,6 @@ class rect {
                << ", w: " << r.data.rect.w << ", h: " << r.data.rect.h << ")";
             return os;
         }
-    
-    private:
-        struct rectData {
-            SDL_Rect rect;
-        };
-
-        rectData data;
 };
 
 #endif

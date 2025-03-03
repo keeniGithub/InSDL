@@ -5,13 +5,13 @@ import main
 from_path = main.from_path
 to_path = main.to_path
 
-def create(folder_name, keep_vscode=False):
+def create(folder_name, keep_vscode=False, keep_batch=False):
     source_folder = from_path
     destination_folder = f'{to_path}/{folder_name}'
 
     os.makedirs(destination_folder, exist_ok=True)
 
-    copy(source_folder, destination_folder, keep_vscode)
+    copy(source_folder, destination_folder, keep_vscode, keep_batch)
 
     print(f"Project {folder_name} successful created!")
 

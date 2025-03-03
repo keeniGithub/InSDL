@@ -1,4 +1,7 @@
-// fork from https://github.com/keenigithub/SimpleCppDelay
+// https://github.com/keenigithub/SimpleCppDelay
+
+#ifndef DELAY
+#define DELAY
 
 #include <iostream>
 #include <chrono>
@@ -27,3 +30,5 @@ void delayhr(int hour)
 {
     sleep_for(hours(hour));
 }
+
+#endif

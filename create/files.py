@@ -1,7 +1,7 @@
 import os
 import shutil
 
-def copy(source_folder, destination_folder, keep_vscode=False):
+def copy(source_folder, destination_folder, keep_vscode=False, keep_batch=False):
     for dirpath, dirnames, filenames in os.walk(source_folder):
         if 'create' in dirnames:
             dirnames.remove('create')
@@ -18,7 +18,9 @@ def copy(source_folder, destination_folder, keep_vscode=False):
         os.makedirs(destination_path, exist_ok=True)
 
         for filename in filenames:
-            if filename in ['main.py', 'create.bat', 'README.md', '.gitignore', 'main.exe', 'main_build.exe', 'test.cpp']:
+            if filename in ['main.py', 'create.bat', 'myCompile.bat', 'README.md', '.gitignore', 'main.exe', 'main_build.exe', 'test.cpp']:
+                continue
+            if filename == 'compile.bat' and not keep_batch:
                 continue
             source_file = os.path.join(dirpath, filename)
             destination_file = os.path.join(destination_path, filename)

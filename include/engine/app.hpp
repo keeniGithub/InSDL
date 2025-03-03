@@ -3,10 +3,12 @@
 
 #include <string>
 #include <iostream>
-#include <SDL3/SDL.h>
 #include <map>
 #include <functional>
 #include <vector>
+
+#include <SDL3/SDL.h>
+#include <rect.hpp>
 
 using namespace std;
 
@@ -17,11 +19,18 @@ class app {
             function<void()> func;
         };
 
+        struct colorStruct {
+            Uint8 r = 0;
+            Uint8 g = 0;
+            Uint8 b = 0;
+        };
+        
     public:
-        SDL_Window *myWindow;
-        SDL_Surface *myWindowSurface;
+        SDL_Window *Window;
+        SDL_Surface *Surface;
         bool quit = false;
         vector<bindStruct> keyBindings;
+        colorStruct color;
 
         void init(int width, int height, string name) {
             SDL_Init(SDL_INIT_VIDEO);
@@ -35,28 +44,34 @@ class app {
                 throw "Окно должно иметь название";
             }
 
-            myWindow = SDL_CreateWindow(
+            Window = SDL_CreateWindow(
                 name.c_str(),
                 width,
                 height,
                 0
             );
-            myWindowSurface = SDL_GetWindowSurface(myWindow);
-            SDL_FillSurfaceRect(myWindowSurface, NULL, SDL_MapRGB(myWindowSurface->format, 0, 0, 0));
+            
+            Surface = SDL_GetWindowSurface(Window);
+            SDL_FillSurfaceRect(Surface, NULL, SDL_MapSurfaceRGB(Surface, 0, 0, 0));
         }
 
-        void update(Uint8 r, Uint8 g, Uint8 b) {
-            SDL_FillSurfaceRect(myWindowSurface, NULL, SDL_MapRGB(myWindowSurface->format, r, g, b));
-            SDL_UpdateWindowSurface(myWindow);
+        void fill(Uint8 r = -1, Uint8 g = -1, Uint8 b = -1) {
+            if (r == -1) r = color.r;
+            else color.r = r;
+            if (g == -1) g = color.g;
+            else color.g = g;
+            if (b == -1) b = color.b;
+            else color.b = b;
+            SDL_FillSurfaceRect(Surface, NULL, SDL_MapSurfaceRGB(Surface, r, g, b));
         }
 
+        void update() {
+            SDL_UpdateWindowSurface(Window);
+        }
+        
         void destroy() {
-            SDL_DestroyWindow(myWindow);
+            SDL_DestroyWindow(Window);
             SDL_Quit();
-        }
-
-        void fill(SDL_Rect *rect, Uint8 r, Uint8 g, Uint8 b) {
-            SDL_FillSurfaceRect(myWindowSurface, rect, SDL_MapRGB(myWindowSurface->format, r, g, b));
         }
         
         void change(int width, int height, string name) {
@@ -65,8 +80,9 @@ class app {
                 return;
             }
         
-            SDL_SetWindowSize(myWindow, width, height);
-            if (!name.empty()) SDL_SetWindowTitle(myWindow, name.c_str());
+            SDL_SetWindowSize(Window, width, height);
+            if (!name.empty())
+                SDL_SetWindowTitle(Window, name.c_str());
         }
 
         template<typename Func>
