@@ -2,4 +2,5 @@
 *.exe
 /src/build
 __pycache__
-test.cpp
+*.cpp
+!main.cpp

@@ -14,7 +14,7 @@ using namespace std;
 
 class app {
     private:
-        struct bindStruct {
+        struct keyBindStruct {
             SDL_Scancode key;
             function<void()> func;
         };
@@ -24,12 +24,23 @@ class app {
             Uint8 g = 0;
             Uint8 b = 0;
         };
+
+        struct mouseBindStruct {
+            Uint8 button;
+            function<void()> func;
+        };
+
+        struct mouseMotionBindStruct {
+            function<void(int, int)> func;
+        };
         
     public:
         SDL_Window *Window;
         SDL_Surface *Surface;
         bool quit = false;
-        vector<bindStruct> keyBindings;
+        vector<keyBindStruct> keyBindings;
+        vector<mouseBindStruct> mouseBindings;
+        vector<mouseMotionBindStruct> mouseMotionBindings;
         colorStruct color;
 
         void init(int width, int height, string name) {
@@ -69,7 +80,7 @@ class app {
             SDL_UpdateWindowSurface(Window);
         }
         
-        void destroy() {
+        void exit() {
             SDL_DestroyWindow(Window);
             SDL_Quit();
         }
@@ -88,6 +99,16 @@ class app {
         template<typename Func>
         void bindKey(SDL_Scancode key, Func func) {
             keyBindings.push_back({ key, func });
+        }
+
+        template<typename Func>
+        void bindMouseButton(Uint8 button, Func func) {
+            mouseBindings.push_back({ button, func });
+        }
+
+        template<typename Func>
+        void bindMouseMotion(Func func) {
+            mouseMotionBindings.push_back({ func });
         }
 };
 

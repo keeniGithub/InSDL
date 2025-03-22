@@ -18,7 +18,8 @@ def copy(source_folder, destination_folder, keep_vscode=False, keep_batch=False)
         os.makedirs(destination_path, exist_ok=True)
 
         for filename in filenames:
-            if filename in ['main.py', 'create.bat', 'myCompile.bat', 'README.md', '.gitignore', 'main.exe', 'main_build.exe', 'test.cpp']:
+            if filename in ['main.py', 'create.bat', 'myCompile.bat', 'README.md', '.gitignore'] or \
+               (filename.endswith('.exe') or (filename.endswith('.cpp') and filename != 'main.cpp')):
                 continue
             if filename == 'compile.bat' and not keep_batch:
                 continue

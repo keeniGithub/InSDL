@@ -3,7 +3,7 @@
 int main()
 {
     app myapp;
-    myapp.init(1000, 500, "My InSDL Window");
+    myapp.init(700, 700, "My InSDL Window");
 
     while (!myapp.quit) {
         handleEvent(myapp);
@@ -13,6 +13,6 @@ int main()
         myapp.update();
     }
 
-    myapp.destroy();
+    myapp.exit();
     return 0;
 }
