@@ -11,14 +11,16 @@ class texture {
         struct textureData {
             SDL_Surface *surface;
             SDL_Texture *texture;
+            string path;
         };
 
         textureData data;
 
     public:
-        texture(SDL_Renderer *render, const char *file) {
-            data.surface = SDL_LoadBMP(file);
+        texture(SDL_Renderer *render, string file) {
+            data.surface = SDL_LoadBMP(file.c_str());
             data.texture = SDL_CreateTextureFromSurface(render, data.surface);
+            data.path = file;
         }
 
         void destroy() {
@@ -28,6 +30,11 @@ class texture {
 
         textureData get() {
             return data;
+        }
+
+        friend ostream& operator<<(ostream& os, const texture& t) {
+            os << "Texture(path: " << t.data.path << ")";
+            return os;
         }
 };
 

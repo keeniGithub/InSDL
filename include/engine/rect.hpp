@@ -87,7 +87,11 @@ class rect {
 
         friend ostream& operator<<(ostream& os, rect& r) {
             os << "Rect(x: " << r.data.rect.x << ", y: " << r.data.rect.y 
-               << ", w: " << r.data.rect.w << ", h: " << r.data.rect.h << ")";
+               << ", w: " << r.data.rect.w << ", h: " << r.data.rect.h 
+               << ", r: " << static_cast<int>(r.color.r) 
+               << ", g: " << static_cast<int>(r.color.g) 
+               << ", b: " << static_cast<int>(r.color.b) 
+               << ")";
             return os;
         }
 };

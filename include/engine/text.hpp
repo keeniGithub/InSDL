@@ -15,6 +15,7 @@ class text {
             TTF_Font* font;
             SDL_Color color = {255, 255, 255, 255};
             string text;
+            string path;
         };
 
         textData data;
@@ -28,6 +29,7 @@ class text {
             data.texture = SDL_CreateTextureFromSurface(render, data.surface);
             Render = render;
             data.text = text;
+            data.path = file;
         }
 
         void destroy() {
@@ -59,6 +61,14 @@ class text {
 
         textData get() {
             return data;
+        }
+
+        friend ostream& operator<<(ostream& os, const text& t) {
+            os << "Text(text: \"" << t.data.text << "\", path: " << t.data.path 
+               << ", r: " << static_cast<int>(t.data.color.r) 
+               << ", g: " << static_cast<int>(t.data.color.g) 
+               << ", b: " << static_cast<int>(t.data.color.b) << ")";
+            return os;
         }
 };
 

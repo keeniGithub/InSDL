@@ -98,7 +98,11 @@ class frect {
 
         friend ostream& operator<<(ostream& os, frect& r) {
             os << "FRect(x: " << r.data.frect.x << ", y: " << r.data.frect.y 
-               << ", w: " << r.data.frect.w << ", h: " << r.data.frect.h << ")";
+               << ", w: " << r.data.frect.w << ", h: " << r.data.frect.h 
+               << ", r: " << static_cast<int>(r.color.r) 
+               << ", g: " << static_cast<int>(r.color.g) 
+               << ", b: " << static_cast<int>(r.color.b) 
+               << ", alpha: " << static_cast<int>(r.color.alpha) << ")";
             return os;
         }
 };
