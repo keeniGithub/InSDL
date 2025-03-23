@@ -20,6 +20,6 @@ def delete(folder_name):
 
     if os.path.exists(destination_folder):
         shutil.rmtree(destination_folder)
-        print(f"Project {folder_name} successuf deleted!")
+        print(f"Project {folder_name} successuful deleted!")
     else:
         print(f"Project {folder_name} not found")

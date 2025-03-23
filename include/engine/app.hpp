@@ -9,6 +9,7 @@
 
 #include <SDL3/SDL.h>
 #include <rect.hpp>
+#include <frect.hpp>
 
 using namespace std;
 
@@ -19,12 +20,6 @@ class app {
             function<void()> func;
         };
 
-        struct colorStruct {
-            Uint8 r = 0;
-            Uint8 g = 0;
-            Uint8 b = 0;
-        };
-
         struct mouseBindStruct {
             Uint8 button;
             function<void()> func;
@@ -33,18 +28,26 @@ class app {
         struct mouseMotionBindStruct {
             function<void(int, int)> func;
         };
-        
-    public:
-        SDL_Window *Window;
-        SDL_Surface *Surface;
-        bool quit = false;
-        vector<keyBindStruct> keyBindings;
-        vector<mouseBindStruct> mouseBindings;
-        vector<mouseMotionBindStruct> mouseMotionBindings;
-        colorStruct color;
 
-        void init(int width, int height, string name) {
+        struct colorStruct {
+            Uint8 r = 0;
+            Uint8 g = 0;
+            Uint8 b = 0;
+        };
+
+        struct windowStruct {
+            int width;
+            int height;
+            string name;
+        };
+
+        bool renderMode;
+        
+        void createWindow(int width, int height, string name){
             SDL_Init(SDL_INIT_VIDEO);
+            window.width = width;
+            window.height = height;
+            window.name = name;
 
             if (width < 0 || height < 0)
             {
@@ -61,9 +64,31 @@ class app {
                 height,
                 0
             );
+        }
+
+    public:
+        SDL_Window *Window;
+        SDL_Surface *Surface;
+        SDL_Renderer *Render;
+        bool quit = false;
+        vector<keyBindStruct> keyBindings;
+        vector<mouseBindStruct> mouseBindings;
+        vector<mouseMotionBindStruct> mouseMotionBindings;
+        colorStruct color;
+        windowStruct window;
+
+        void init(int width, int height, string name, bool render = false) {
+            createWindow(width, height, name);
             
-            Surface = SDL_GetWindowSurface(Window);
-            SDL_FillSurfaceRect(Surface, NULL, SDL_MapSurfaceRGB(Surface, 0, 0, 0));
+            if (!render) {
+                renderMode = false;
+                Surface = SDL_GetWindowSurface(Window);
+                SDL_FillSurfaceRect(Surface, NULL, SDL_MapSurfaceRGB(Surface, 0, 0, 0));
+            } else {
+                renderMode = true;
+                Render = SDL_CreateRenderer(Window, NULL);
+                SDL_FillSurfaceRect(Surface, NULL, SDL_MapSurfaceRGB(Surface, 0, 0, 0));
+            }
         }
 
         void fill(Uint8 r = -1, Uint8 g = -1, Uint8 b = -1) {
@@ -73,14 +98,21 @@ class app {
             else color.g = g;
             if (b == -1) b = color.b;
             else color.b = b;
-            SDL_FillSurfaceRect(Surface, NULL, SDL_MapSurfaceRGB(Surface, r, g, b));
+
+            if (!renderMode) SDL_FillSurfaceRect(Surface, NULL, SDL_MapSurfaceRGB(Surface, r, g, b));
+            else {
+                SDL_SetRenderDrawColor(Render, r, g, b, 255);
+                SDL_RenderClear(Render);
+            }
         }
 
         void update() {
-            SDL_UpdateWindowSurface(Window);
+            if (renderMode) SDL_RenderPresent(Render);
+            else SDL_UpdateWindowSurface(Window);
         }
         
         void exit() {
+            if (renderMode) SDL_DestroyRenderer(Render);
             SDL_DestroyWindow(Window);
             SDL_Quit();
         }
@@ -91,9 +123,14 @@ class app {
                 return;
             }
         
+            window.width = width;
+            window.height = height;
             SDL_SetWindowSize(Window, width, height);
-            if (!name.empty())
+
+            if (!name.empty()) {
                 SDL_SetWindowTitle(Window, name.c_str());
+                window.name = name;
+            }
         }
 
         template<typename Func>

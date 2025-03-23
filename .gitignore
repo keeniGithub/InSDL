@@ -4,3 +4,4 @@
 __pycache__
 *.cpp
 !main.cpp
+img.bmp
