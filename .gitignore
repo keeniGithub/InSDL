@@ -1,7 +1,9 @@
 /include/SDL3
+/include/SDL3_TTF
 *.exe
 /src/build
 __pycache__
 *.cpp
 !main.cpp
 img.bmp
+font.ttf

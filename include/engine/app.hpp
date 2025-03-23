@@ -8,6 +8,7 @@
 #include <vector>
 
 #include <SDL3/SDL.h>
+#include <SDL3_ttf/SDL_ttf.h>
 #include <rect.hpp>
 #include <frect.hpp>
 
@@ -87,7 +88,7 @@ class app {
             } else {
                 renderMode = true;
                 Render = SDL_CreateRenderer(Window, NULL);
-                SDL_FillSurfaceRect(Surface, NULL, SDL_MapSurfaceRGB(Surface, 0, 0, 0));
+                TTF_Init();
             }
         }
 
@@ -111,12 +112,11 @@ class app {
             else SDL_UpdateWindowSurface(Window);
         }
         
-        void exit() {
-            if (renderMode) SDL_DestroyRenderer(Render);
-            SDL_DestroyWindow(Window);
-            SDL_Quit();
+        void setIcon(texture icon) {
+            SDL_Surface *iconSurface = icon.get().surface;
+            SDL_SetWindowIcon(Window, iconSurface);
         }
-        
+
         void change(int width, int height, string name) {
             if ((width < 0 && width != -1) || (height < 0 && height != -1)) {
                 throw "Размер окна не может быть меньше 0";
@@ -146,6 +146,15 @@ class app {
         template<typename Func>
         void bindMouseMotion(Func func) {
             mouseMotionBindings.push_back({ func });
+        }
+
+        void exit() {
+            if (renderMode) {
+                SDL_DestroyRenderer(Render); 
+                TTF_Quit();
+            }
+            SDL_DestroyWindow(Window);
+            SDL_Quit();
         }
 };
 

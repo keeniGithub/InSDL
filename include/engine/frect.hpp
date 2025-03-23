@@ -4,6 +4,7 @@
 #include <SDL3/SDL.h>
 #include <iostream>
 #include <texture.hpp>
+#include <text.hpp>
 
 using namespace std;
 
@@ -88,7 +89,11 @@ class frect {
         }
 
         void fillTexture(SDL_Renderer *render, texture *texture){
-            SDL_RenderTexture(render, texture->get(), NULL, &data.frect);
+            SDL_RenderTexture(render, texture->get().texture, NULL, &data.frect);
+        }
+
+        void fillText(SDL_Renderer *render, text *text){
+            SDL_RenderTexture(render, text->get().texture, NULL, &data.frect);
         }
 
         friend ostream& operator<<(ostream& os, frect& r) {

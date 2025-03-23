@@ -93,31 +93,148 @@ $ python main.py compile PROJECT_NAME
 - **`void init(int width, int height, string name, bool render = false)`**: Инициализация окна.
 - **`void fill(Uint8 r = -1, Uint8 g = -1, Uint8 b = -1)`**: Заполнение окна цветом.
 - **`void update()`**: Обновление содержимого окна.
-- **`void exit()`**: Закрытие приложения.
+- **`void setIcon(texture icon) `**: Установить иконку окна.
 - **`void change(int width, int height, string name)`**: Изменение размера и названия окна.
+- **`void exit()`**: Закрытие приложения.
 - **`template<typename Func> void bindKey(SDL_Scancode key, Func func)`**: Привязка функции к нажатию клавиши.
 - **`template<typename Func> void bindMouseButton(Uint8 button, Func func)`**: Привязка функции к нажатию кнопки мыши.
 - **`template<typename Func> void bindMouseMotion(Func func)`**: Привязка функции к движению мыши.
 
-### Класс `frect`
-Класс `frect` представляет собой плавающий прямоугольник и позволяет управлять его размерами и цветом. Используется вместе с **Render**
+---
+
+### Класс `text`
+Класс `text` создает текст и позволяет управлять его содержимым, цветом и текстурой.
+
+#### Конструктор
+- **`text(SDL_Renderer *render, const string& text, string file, Uint8 r = 255, Uint8 g = 255, Uint8 b = 255)`**  
+  Создает текст с заданным содержимым, шрифтом и цветом.  
+  - `render`: Указатель на рендерер SDL.  
+  - `text`: Текст для отображения.  
+  - `file`: Путь к файлу шрифта.  
+  - `r`, `g`, `b`: Цвет текста (по умолчанию белый).
 
 #### Методы
-- **`void fill(SDL_Renderer *render, Uint8 r = -1, Uint8 g = -1, Uint8 b = -1, Uint8 alpha = -1)`**: Заполнение прямоугольника цветом.
-- **`void fillTexture(SDL_Renderer *render, texture *texture)`**: Заполнение прямоугольника текстурой.
+- **`void destroy()`**  
+  Уничтожает текстуру и поверхность текста.
+
+- **`void setText(const string& newText)`**  
+  Изменяет текст и обновляет текстуру.  
+  - `newText`: Новый текст для отображения.
+
+- **`void setColor(Uint8 r = -1, Uint8 g = -1, Uint8 b = -1)`**  
+  Изменяет цвет текста и обновляет текстуру.  
+  - `r`, `g`, `b`: Новый цвет текста (если не указан, используется текущий цвет).
+
+- **`textData get()`**  
+  Возвращает данные текста, включая текстуру, поверхность, шрифт и цвет.
+
+---
 
 ### Класс `rect`
-Класс `rect` представляет собой прямоугольник и позволяет управлять его размерами и цветом.
+Класс `rect` представляет собой прямоугольник и позволяет управлять его размерами, положением и цветом.
+
+#### Конструктор
+- **`rect(int x = 0, int y = 0, int w = 0, int h = 0)`**  
+  Создает прямоугольник с заданными координатами и размерами.  
+  - `x`, `y`: Координаты верхнего левого угла.  
+  - `w`, `h`: Ширина и высота прямоугольника.
 
 #### Методы
-- **`void fill(SDL_Surface *surface, Uint8 r = -1, Uint8 g = -1, Uint8 b = -1)`**: Заполнение прямоугольника цветом.
-- **`void update(SDL_Surface *surface)`**: Обновление прямоугольника на поверхности.
+- **`void setRect(int x, int y, int w, int h)`**  
+  Устанавливает координаты и размеры прямоугольника.
+
+- **`void setPosition(int x, int y)`**  
+  Устанавливает позицию прямоугольника.
+
+- **`void setSize(int w, int h)`**  
+  Устанавливает размеры прямоугольника.
+
+- **`void setX(int x)`**, **`void setY(int y)`**, **`void setWidth(int w)`**, **`void setHeight(int h)`**  
+  Устанавливают соответствующие параметры прямоугольника.
+
+- **`void addX(int x)`**, **`void addY(int y)`**, **`void addWidth(int w)`**, **`void addHeight(int h)`**  
+  Увеличивают соответствующие параметры прямоугольника.
+
+- **`void subX(int x)`**, **`void subY(int y)`**, **`void subWidth(int w)`**, **`void subHeight(int h)`**  
+  Уменьшают соответствующие параметры прямоугольника.
+
+- **`int getX()`**, **`int getY()`**, **`int getWidth()`**, **`int getHeight()`**  
+  Возвращают соответствующие параметры прямоугольника.
+
+- **`SDL_Rect get()`**  
+  Возвращает структуру `SDL_Rect`.
+
+- **`void fill(SDL_Surface *surface, Uint8 r = -1, Uint8 g = -1, Uint8 b = -1)`**  
+  Заполняет прямоугольник цветом на указанной поверхности.
+
+- **`void update(SDL_Surface *surface)`**  
+  Обновляет прямоугольник на указанной поверхности.
+
+---
+
+### Класс `frect`
+Класс `frect` представляет собой прямоугольник с плавающими координатами и позволяет управлять его размерами, положением и цветом.
+
+#### Конструктор
+- **`frect(int x = 0, int y = 0, int w = 0, int h = 0)`**  
+  Создает прямоугольник с заданными координатами и размерами.  
+  - `x`, `y`: Координаты верхнего левого угла.  
+  - `w`, `h`: Ширина и высота прямоугольника.
+
+#### Методы
+- **`void setFrect(int x, int y, int w, int h)`**  
+  Устанавливает координаты и размеры прямоугольника.
+
+- **`void setPosition(int x, int y)`**  
+  Устанавливает позицию прямоугольника.
+
+- **`void setSize(int w, int h)`**  
+  Устанавливает размеры прямоугольника.
+
+- **`void setX(int x)`**, **`void setY(int y)`**, **`void setWidth(int w)`**, **`void setHeight(int h)`**  
+  Устанавливают соответствующие параметры прямоугольника.
+
+- **`void addX(int x)`**, **`void addY(int y)`**, **`void addWidth(int w)`**, **`void addHeight(int h)`**  
+  Увеличивают соответствующие параметры прямоугольника.
+
+- **`void subX(int x)`**, **`void subY(int y)`**, **`void subWidth(int w)`**, **`void subHeight(int h)`**  
+  Уменьшают соответствующие параметры прямоугольника.
+
+- **`int getX()`**, **`int getY()`**, **`int getWidth()`**, **`int getHeight()`**  
+  Возвращают соответствующие параметры прямоугольника.
+
+- **`SDL_FRect get()`**  
+  Возвращает структуру `SDL_FRect`.
+
+- **`void fill(SDL_Renderer *render, Uint8 r = -1, Uint8 g = -1, Uint8 b = -1, Uint8 alpha = -1)`**  
+  Заполняет прямоугольник цветом на указанном рендерере.
+
+- **`void fillTexture(SDL_Renderer *render, texture *texture)`**  
+  Заполняет прямоугольник текстурой.
+
+- **`void fillText(SDL_Renderer *render, text *text)`**  
+  Заполняет прямоугольник текстом.
+
+---
 
 ### Класс `texture`
-Класс `texture` управляет текстурами, загружая их из файлов, в формате **24-битного BMP**
+Класс `texture` управляет текстурами, загружая их из файлов.
+
+#### Конструктор
+- **`texture(SDL_Renderer *render, const char *file)`**  
+  Загружает текстуру из файла BMP.  
+  - `render`: Указатель на рендерер SDL.  
+  - `file`: Путь к файлу BMP.
 
 #### Методы
-- **`SDL_Texture* get()`**: Получение текстуры.
+- **`textureData get()`**  
+  Возвращает данные текстуры.
+
+- **`void destroy()`**  
+  Уничтожает текстуру.
+
+
+---
 
 ## Библиотека задержек
 InSDL также включает простую [библиотеку](https://github.com/keenigithub/SimpleCppDelay) для создания задержек.
@@ -128,9 +245,11 @@ InSDL также включает простую [библиотеку](https://
 - **`void delaymn(int min)`**: Задержка в минутах.
 - **`void delayhr(int hour)`**: Задержка в часах.
 
+---
+
 ## Файл `event.hpp`
 
-#### Функцииъ
+#### Функции
 
 Используются только в начале основного цикла
 

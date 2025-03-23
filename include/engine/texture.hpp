@@ -19,11 +19,15 @@ class texture {
         texture(SDL_Renderer *render, const char *file) {
             data.surface = SDL_LoadBMP(file);
             data.texture = SDL_CreateTextureFromSurface(render, data.surface);
-            SDL_DestroySurface(data.surface);
         }
 
-        SDL_Texture* get() {
-            return data.texture;
+        void destroy() {
+            SDL_DestroySurface(data.surface);
+            SDL_DestroyTexture(data.texture);
+        }
+
+        textureData get() {
+            return data;
         }
 };
 
