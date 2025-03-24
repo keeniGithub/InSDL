@@ -91,7 +91,7 @@ $ python main.py compile PROJECT_NAME
 
 #### Методы
 - **`void init(int width, int height, string name, bool render = false)`**: Инициализация окна.
-- **`void fill(Uint8 r = -1, Uint8 g = -1, Uint8 b = -1)`**: Заполнение окна цветом.
+- **`void fill(Uint8 r = -1, Uint8 g = -1, Uint8 b = -1)`**: Заполнение окна цветом. Eсли хотите оставить текущий цвет используйте -1.
 - **`void update()`**: Обновление содержимого окна.
 - **`void setIcon(texture icon) `**: Установить иконку окна.
 - **`void change(int width, int height, string name)`**: Изменение размера и названия окна.
@@ -123,7 +123,7 @@ $ python main.py compile PROJECT_NAME
 
 - **`void setColor(Uint8 r = -1, Uint8 g = -1, Uint8 b = -1)`**  
   Изменяет цвет текста и обновляет текстуру.  
-  - `r`, `g`, `b`: Новый цвет текста (если не указан, используется текущий цвет).
+  - `r`, `g`, `b`: Новый цвет текста (если указать -1, будет использоваться текущий цвет).
 
 - **`textData get()`**  
   Возвращает данные текста, включая текстуру, поверхность, шрифт и цвет.
@@ -166,9 +166,18 @@ $ python main.py compile PROJECT_NAME
 
 - **`void fill(SDL_Surface *surface, Uint8 r = -1, Uint8 g = -1, Uint8 b = -1)`**  
   Заполняет прямоугольник цветом на указанной поверхности.
+  Eсли хотите оставить текущий цвет используйте -1.
 
 - **`void update(SDL_Surface *surface)`**  
   Обновляет прямоугольник на указанной поверхности.
+
+- **`bool onTouch(rect& otrect)`**  
+  Проверяет, пересекается ли текущий прямоугольник с другим прямоугольником `otrect`.  
+  Возвращает `true`, если прямоугольники пересекаются, иначе `false`.
+
+- **`bool onHover()`**  
+  Проверяет, находится ли курсор мыши внутри текущего прямоугольника.  
+  Возвращает `true`, если курсор находится внутри, иначе `false`.
 
 ---
 
@@ -182,7 +191,7 @@ $ python main.py compile PROJECT_NAME
   - `w`, `h`: Ширина и высота прямоугольника.
 
 #### Методы
-- **`void setFrect(int x, int y, int w, int h)`**  
+- **`void setFrect(int x, int цуаy, int w, int h)`**  
   Устанавливает координаты и размеры прямоугольника.
 
 - **`void setPosition(int x, int y)`**  
@@ -208,12 +217,21 @@ $ python main.py compile PROJECT_NAME
 
 - **`void fill(SDL_Renderer *render, Uint8 r = -1, Uint8 g = -1, Uint8 b = -1, Uint8 alpha = -1)`**  
   Заполняет прямоугольник цветом на указанном рендерере.
+  Eсли хотите оставить текущий цвет используйте -1.
 
 - **`void fillTexture(SDL_Renderer *render, texture *texture)`**  
   Заполняет прямоугольник текстурой.
 
 - **`void fillText(SDL_Renderer *render, text *text)`**  
   Заполняет прямоугольник текстом.
+
+- **`bool onTouch(frect& otfrect)`**  
+  Проверяет, пересекается ли текущий прямоугольник с другим прямоугольником `otfrect`.  
+  Возвращает `true`, если прямоугольники пересекаются, иначе `false`.
+
+- **`bool onHover()`**  
+  Проверяет, находится ли курсор мыши внутри текущего прямоугольника.  
+  Возвращает `true`, если курсор находится внутри, иначе `false`.
 
 ---
 

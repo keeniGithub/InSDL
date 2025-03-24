@@ -85,6 +85,27 @@ class rect {
             SDL_FillSurfaceRect(surface, &data.rect, SDL_MapSurfaceRGB(surface, color.r, color.g, color.b));
         }
 
+        bool onTouch(rect& otrect) {
+            if (data.rect.x < otrect.data.rect.x + otrect.data.rect.w &&
+                data.rect.x + data.rect.w > otrect.data.rect.x &&
+                data.rect.y < otrect.data.rect.y + otrect.data.rect.h &&
+                data.rect.y + data.rect.h > otrect.data.rect.y) {
+                return true;
+            }
+            return false;
+        }
+
+        bool onHover() {
+            float mouseX, mouseY;
+            SDL_GetMouseState(&mouseX, &mouseY);
+
+            if (mouseX >= data.rect.x && mouseX <= data.rect.x + data.rect.w &&
+                mouseY >= data.rect.y && mouseY <= data.rect.y + data.rect.h) {
+                return true;
+            }
+            return false;
+        }
+        
         friend ostream& operator<<(ostream& os, rect& r) {
             os << "Rect(x: " << r.data.rect.x << ", y: " << r.data.rect.y 
                << ", w: " << r.data.rect.w << ", h: " << r.data.rect.h 

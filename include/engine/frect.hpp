@@ -96,6 +96,27 @@ class frect {
             SDL_RenderTexture(render, text->get().texture, NULL, &data.frect);
         }
 
+        bool onTouch(frect& otfrect) {
+            if (data.frect.x < otfrect.data.frect.x + otfrect.data.frect.w &&
+                data.frect.x + data.frect.w > otfrect.data.frect.x &&
+                data.frect.y < otfrect.data.frect.y + otfrect.data.frect.h &&
+                data.frect.y + data.frect.h > otfrect.data.frect.y) {
+                return true;
+            }
+            return false;
+        }
+
+        bool onHover() {
+            float mouseX, mouseY;
+            SDL_GetMouseState(&mouseX, &mouseY);
+
+            if (mouseX >= data.frect.x && mouseX <= data.frect.x + data.frect.w &&
+                mouseY >= data.frect.y && mouseY <= data.frect.y + data.frect.h) {
+                return true;
+            }
+            return false;
+        }
+
         friend ostream& operator<<(ostream& os, frect& r) {
             os << "FRect(x: " << r.data.frect.x << ", y: " << r.data.frect.y 
                << ", w: " << r.data.frect.w << ", h: " << r.data.frect.h 
