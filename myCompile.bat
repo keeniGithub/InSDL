@@ -32,4 +32,4 @@ if !choix! gtr %count% (
 
 set filename=!files[%choix%]!
 
-g++ src\%filename%.cpp -g -o build\%filename%_build.exe -lSDL3 -lSDL3_ttf -Iheader -Llib -Iinclude -Iinclude\engine
+g++ src\%filename%.cpp -g -o build\%filename%_build.exe -lSDL3 -lSDL3_ttf -lSDL3_Image -Iheader -Llib -Iinclude -Iinclude\engine

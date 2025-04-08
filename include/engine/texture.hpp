@@ -2,6 +2,7 @@
 #define TEXTURE
 
 #include <SDL3/SDL.h>
+#include <SDL3_image/SDL_image.h>
 #include <iostream>
 
 using namespace std;
@@ -18,7 +19,7 @@ class texture {
 
     public:
         texture(SDL_Renderer *render, string file) {
-            data.surface = SDL_LoadBMP(file.c_str());
+            data.surface = IMG_Load(file.c_str());
             data.texture = SDL_CreateTextureFromSurface(render, data.surface);
             data.path = file;
         }

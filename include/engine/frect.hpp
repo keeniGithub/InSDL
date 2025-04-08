@@ -21,9 +21,9 @@ class frect {
             Uint8 alpha = 255;
         };
 
-        frectData data;
 
     public:
+        frectData data;
         colorStruct color;
 
         frect(int x = 0, int y = 0, int w = 0, int h = 0) {
@@ -88,8 +88,12 @@ class frect {
             SDL_RenderFillRect(render, &data.frect);
         }
 
-        void fillTexture(SDL_Renderer *render, texture *texture){
-            SDL_RenderTexture(render, texture->get().texture, NULL, &data.frect);
+        void fillTexture(SDL_Renderer *render, texture *texture, double deg = 0, SDL_FlipMode mode = SDL_FLIP_NONE){
+            SDL_FPoint point;
+            point.x = data.frect.w/2;
+            point.y = data.frect.h/2;
+
+            SDL_RenderTextureRotated(render, texture->get().texture, NULL, &data.frect, deg, &point, mode);
         }
 
         void fillText(SDL_Renderer *render, text *text){
