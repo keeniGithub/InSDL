@@ -88,11 +88,7 @@ class frect {
             SDL_RenderFillRect(render, &data.frect);
         }
 
-        void fillTexture(SDL_Renderer *render, texture *texture, double deg = 0, SDL_FlipMode mode = SDL_FLIP_NONE){
-            SDL_FPoint point;
-            point.x = data.frect.w/2;
-            point.y = data.frect.h/2;
-
+        void fillTexture(SDL_Renderer *render, texture *texture, double deg = 0, SDL_FlipMode mode = SDL_FLIP_NONE, SDL_FPoint point = {0, 0}){
             SDL_RenderTextureRotated(render, texture->get().texture, NULL, &data.frect, deg, &point, mode);
         }
 

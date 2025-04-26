@@ -22,14 +22,14 @@ class text {
         SDL_Renderer *Render;
 
     public:
-        text(SDL_Renderer *render, const string& text, string file, Uint8 r = 255, Uint8 g = 255, Uint8 b = 255) {
+        text(SDL_Renderer *render, string& text, string fontpath, Uint8 r = 255, Uint8 g = 255, Uint8 b = 255) {
             data.color = {r, g, b, 255};
-            data.font = TTF_OpenFont(file.c_str(), 128);
+            data.font = TTF_OpenFont(fontpath.c_str(), 128);
             data.surface = TTF_RenderText_Solid(data.font, text.c_str(), text.length(), data.color);
             data.texture = SDL_CreateTextureFromSurface(render, data.surface);
             Render = render;
             data.text = text;
-            data.path = file;
+            data.path = fontpath;
         }
 
         void destroy() {
@@ -37,7 +37,7 @@ class text {
             SDL_DestroyTexture(data.texture);
         }
 
-        void setText(const string& newText) {
+        void setText(string& newText) {
             destroy();
 
             data.surface = TTF_RenderText_Solid(data.font, newText.c_str(), newText.length(), data.color);

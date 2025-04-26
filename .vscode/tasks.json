@@ -15,7 +15,7 @@
 				"-L${workspaceFolder}\\lib\\",
 				"-lSDL3",
 				"-lSDL3_ttf",
-				// "-lSDL3_Image",
+				"-lSDL3_Image",
 				"-o",
 				"${workspaceFolder}\\build\\${fileBasenameNoExtension}_build.exe"
 			],

@@ -6,6 +6,7 @@
 #include <map>
 #include <functional>
 #include <vector>
+#include <direct.h>
 
 #include <SDL3/SDL.h>
 #include <SDL3_ttf/SDL_ttf.h>
@@ -67,6 +68,9 @@ class app {
             );
         }
 
+        char buffer[1024];
+        char* pathname = getcwd(buffer, 1024);
+
     public:
         SDL_Window *Window;
         SDL_Surface *Surface;
@@ -77,10 +81,12 @@ class app {
         vector<mouseMotionBindStruct> mouseMotionBindings;
         colorStruct color;
         windowStruct window;
+        string font = string(buffer);
 
-        void init(int width, int height, string name, bool render = false) {
+        void init(int width, int height, string name, bool render = false, string fontpath = "") {
             createWindow(width, height, name);
-            
+            if (!fontpath.empty()) font = fontpath;
+
             if (!render) {
                 renderMode = false;
                 Surface = SDL_GetWindowSurface(Window);
@@ -115,6 +121,10 @@ class app {
         void setIcon(texture icon) {
             SDL_Surface *iconSurface = icon.get().surface;
             SDL_SetWindowIcon(Window, iconSurface);
+        }
+
+        void setFont(string fontpath){
+            font = fontpath;
         }
 
         void change(int width, int height, string name) {
