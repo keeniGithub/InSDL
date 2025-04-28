@@ -44,6 +44,7 @@ class app {
         };
 
         bool renderMode;
+        string error = "";
         
         void createWindow(int width, int height, string name){
             SDL_Init(SDL_INIT_VIDEO);
@@ -52,13 +53,9 @@ class app {
             window.name = name;
 
             if (width < 0 || height < 0)
-            {
-                throw "Размер окна не может быть меньше 0";
-            }
+                error = "Размер окна не может быть меньше 0";
             else if (name.empty())
-            {
-                throw "Окно должно иметь название";
-            }
+                error = "Окно должно иметь название";
 
             Window = SDL_CreateWindow(
                 name.c_str(),
@@ -129,10 +126,8 @@ class app {
         }
 
         void change(int width, int height, string name) {
-            if ((width < 0 && width != -1) || (height < 0 && height != -1)) {
-                throw "Размер окна не может быть меньше 0";
-                return;
-            }
+            if ((width < 0 && width != -1) || (height < 0 && height != -1))
+                error = "Размер окна не может быть меньше 0";
         
             window.width = width;
             window.height = height;
@@ -142,6 +137,10 @@ class app {
                 SDL_SetWindowTitle(Window, name.c_str());
                 window.name = name;
             }
+        }
+
+        string getError(){
+            return error;
         }
 
         template<typename Func, typename FuncUp>

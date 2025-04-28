@@ -6,6 +6,10 @@
 
 ![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white) ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 
+# Скачать для добавление в проект во вкладке [Релизов](https://github.com/keeniGithub/InSDL/releases)
+
+---
+
 ## Создание проекта
 
 ### Настройка путей в `main.py`
@@ -74,6 +78,9 @@ $ python main.py compile PROJECT_NAME
 ---
 
 # Документация
+
+### ДАННАЯ ВЕРСИЯ ДОКУМЕНТАЦИИ НЕ АКТУАЛЬНА!
+В скором времени она будет обновленна
 
 ## Основные классы
 
