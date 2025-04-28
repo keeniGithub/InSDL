@@ -11,7 +11,7 @@
 				"${file}",
 				"-I${workspaceFolder}\\header\\",
 				"-I${workspaceFolder}\\include\\",
-				"-I${workspaceFolder}\\include\\engine\\",
+				"-I${workspaceFolder}\\include\\InSDL\\",
 				"-L${workspaceFolder}\\lib\\",
 				"-lSDL3",
 				"-lSDL3_ttf",

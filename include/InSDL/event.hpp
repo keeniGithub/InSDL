@@ -32,6 +32,15 @@ void handleEvent(app& app) {
                 }
             }
         }
+        else if (event.type == SDL_EVENT_KEY_UP) {
+            SDL_Scancode scancode = event.key.scancode;
+            for (auto &binding : app.keyUpBindings) {
+                if (scancode == binding.key) {
+                    binding.func();
+                    break;
+                }
+            }
+        }
         else if (event.type == SDL_EVENT_MOUSE_BUTTON_DOWN) {
             for (const auto& binding : app.mouseBindings) {
                 if (binding.button == event.button.button) {

@@ -77,11 +77,12 @@ class app {
         SDL_Renderer *Render;
         bool quit = false;
         vector<keyBindStruct> keyBindings;
+        vector<keyBindStruct> keyUpBindings;
         vector<mouseBindStruct> mouseBindings;
         vector<mouseMotionBindStruct> mouseMotionBindings;
         colorStruct color;
         windowStruct window;
-        string font = string(buffer);
+        string font = string(buffer) + "\\include\\InSDL\\font.ttf";
 
         void init(int width, int height, string name, bool render = false, string fontpath = "") {
             createWindow(width, height, name);
@@ -143,9 +144,10 @@ class app {
             }
         }
 
-        template<typename Func>
-        void bindKey(SDL_Scancode key, Func func) {
+        template<typename Func, typename FuncUp>
+        void bindKey(SDL_Scancode key, Func func, FuncUp funcup = [](){}) {
             keyBindings.push_back({ key, func });
+            keyUpBindings.push_back({ key, funcup });
         }
 
         template<typename Func>
