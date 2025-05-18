@@ -44,25 +44,14 @@ class app {
         };
 
         bool renderMode;
-        string error = "";
         
         void createWindow(int width, int height, string name){
-            SDL_Init(SDL_INIT_VIDEO);
+            SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
             window.width = width;
             window.height = height;
             window.name = name;
 
-            if (width < 0 || height < 0)
-                error = "Размер окна не может быть меньше 0";
-            else if (name.empty())
-                error = "Окно должно иметь название";
-
-            Window = SDL_CreateWindow(
-                name.c_str(),
-                width,
-                height,
-                0
-            );
+            Window = SDL_CreateWindow(name.c_str(), width, height, 0);
         }
 
         char buffer[1024];
@@ -104,7 +93,8 @@ class app {
             if (b == -1) b = color.b;
             else color.b = b;
 
-            if (!renderMode) SDL_FillSurfaceRect(Surface, NULL, SDL_MapSurfaceRGB(Surface, r, g, b));
+            if (!renderMode) 
+                SDL_FillSurfaceRect(Surface, NULL, SDL_MapSurfaceRGB(Surface, r, g, b));
             else {
                 SDL_SetRenderDrawColor(Render, r, g, b, 255);
                 SDL_RenderClear(Render);
@@ -126,9 +116,6 @@ class app {
         }
 
         void change(int width, int height, string name) {
-            if ((width < 0 && width != -1) || (height < 0 && height != -1))
-                error = "Размер окна не может быть меньше 0";
-        
             window.width = width;
             window.height = height;
             SDL_SetWindowSize(Window, width, height);
@@ -137,10 +124,6 @@ class app {
                 SDL_SetWindowTitle(Window, name.c_str());
                 window.name = name;
             }
-        }
-
-        string getError(){
-            return error;
         }
 
         template<typename Func, typename FuncUp>

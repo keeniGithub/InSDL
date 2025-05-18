@@ -8,6 +8,7 @@
 #include <texture.hpp>
 #include <text.hpp>
 #include <delay.hpp>
+#include <audio.hpp>
 #include <SDL3/SDL_scancode.h>
 
 #endif

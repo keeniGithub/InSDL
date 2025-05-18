@@ -7,3 +7,4 @@ __pycache__
 !main.cpp
 img.bmp
 font.ttf
+audio.wav
