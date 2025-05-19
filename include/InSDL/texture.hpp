@@ -14,10 +14,9 @@ class texture {
             SDL_Texture *texture;
             string path;
         };
-
+    public:
         textureData data;
 
-    public:
         texture(SDL_Renderer *render, string file) {
             data.surface = IMG_Load(file.c_str());
             data.texture = SDL_CreateTextureFromSurface(render, data.surface);

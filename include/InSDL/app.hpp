@@ -56,7 +56,6 @@ class app {
 
         char buffer[1024];
         char* pathname = getcwd(buffer, 1024);
-
     public:
         SDL_Window *Window;
         SDL_Surface *Surface;

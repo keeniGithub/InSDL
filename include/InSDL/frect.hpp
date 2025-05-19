@@ -20,8 +20,6 @@ class frect {
             Uint8 b = 0;
             Uint8 alpha = 255;
         };
-
-
     public:
         frectData data;
         colorStruct color;

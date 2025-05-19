@@ -16,11 +16,10 @@ class audio {
             Uint32 wav_data_len = 0;
             SDL_AudioDeviceID device = 0;
         };
-
+    public:
         audioData data;
         string path;
 
-    public:
         audio(const string& wavPath) : path(wavPath) {
             SDL_LoadWAV(wavPath.c_str(), &data.spec, &data.wav_data, &data.wav_data_len);
 
@@ -44,7 +43,7 @@ class audio {
             SDL_PauseAudioDevice(data.device);
         }
 
-        void close() {
+        void stop() {
             if (data.device) {
                 SDL_PauseAudioDevice(data.device);
                 SDL_CloseAudioDevice(data.device);

@@ -4,80 +4,11 @@
 
 ### фреймворк для SDL
 
-![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white) ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white)
 
 # Скачать для добавление в проект во вкладке [Релизов](https://github.com/keeniGithub/InSDL/releases)
 
----
 
-## Создание проекта
-
-### Настройка путей в `main.py`
-
-Перед началом работы отредактируйте пути в файле `main.py`:
-
-```python
-from_path = ''  # Путь к папке, откуда будут копироваться файлы
-to_path = ''    # Путь к папке, куда будут создаваться проекты
-```
-
-### Команды для создания проекта
-
-Чтобы создать новый проект, выполните одну из следующих команд:
-
-```sh
-$ insdl create PROJECT_NAME -flag  # Запустите файл из папки create с insdl.bat
-```
-
-или 
-
-```sh
-$ .\create.bat
-```
-
-или 
-
-```sh
-$ python main.py create PROJECT_NAME -flag
-```
-
-- `-h` — выводит список всех доступных команд.
-- `-vsc` — добавляет папку `.vscode` с уже настроенным **g++**.
-- `-bat` — добавлять файл `compile.bat` к вам в проект
-
-### Удаление проекта
-
-Чтобы удалить проект, используйте одну из следующих команд:
-
-```sh
-$ insdl del PROJECT_NAME  # Запустите файл из папки create с insdl.bat
-```
-
-или 
-
-```sh
-$ python main.py del PROJECT_NAME
-```
-
-### Компиляция проекта
-
-Для компиляции проекта выполните одну из следующих команд:
-
-```sh
-$ insdl compile PROJECT_NAME  # Запустите файл из папки create с insdl.bat
-```
-
-или 
-
-```sh
-$ python main.py compile PROJECT_NAME
-```
-
-или запустите `compiler.bat`.
-
----
-
-# Документация
 
 ### ДАННАЯ ВЕРСИЯ ДОКУМЕНТАЦИИ НЕ АКТУАЛЬНА!
 В скором времени она будет обновленна

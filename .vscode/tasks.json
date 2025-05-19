@@ -3,8 +3,8 @@
 	"tasks": [
 		{
 			"type": "cppbuild",
-			"label": "C/C++: g++.exe build active file",
-			"command": "C:\\msys64\\mingw64\\bin\\g++.exe",
+			"label": "build file",
+			"command": "g++",
 			"args": [
 				"-fdiagnostics-color=always",
 				"-g",
@@ -28,8 +28,52 @@
 			"group": {
 				"kind": "build",
 				"isDefault": true
+			}
+		},
+		{
+			"type": "cppbuild",
+			"label": "build static",
+			"command": "g++",
+			"args": [
+				"-fdiagnostics-color=always",
+				"-g",
+				"${file}",
+				"-I${workspaceFolder}\\header\\",
+				"-I${workspaceFolder}\\include\\",
+				"-I${workspaceFolder}\\include\\InSDL\\",
+				"-L${workspaceFolder}\\lib\\",
+				"-lSDL3",
+				"-lSDL3_ttf",
+				"-lSDL3_Image",
+				"-lm",
+				"-lkernel32",
+				"-luser32",
+				"-lgdi32",
+				"-lwinmm",
+				"-limm32",
+				"-lole32",
+				"-loleaut32",
+				"-lversion",
+				"-luuid",
+				"-ladvapi32",
+				"-lsetupapi",
+				"-lshell32",
+				"-ldinput8",
+				"-o",
+				"${workspaceFolder}\\build\\${fileBasenameNoExtension}_static_build.exe",
+				"-static",
+				"-mwindows"
+			],
+			"options": {
+				"cwd": "${fileDirname}"
 			},
-			"detail": "compiler: C:\\msys64\\mingw64\\bin\\g++.exe"
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
 		}
 	]
 }

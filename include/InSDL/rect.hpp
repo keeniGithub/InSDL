@@ -17,10 +17,8 @@ class rect {
             Uint8 g = 0;
             Uint8 b = 0;
         };
-
-        rectData data;
-
     public:
+        rectData data;
         colorStruct color;
 
         rect(int x = 0, int y = 0, int w = 0, int h = 0) {

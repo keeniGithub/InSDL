@@ -1,10 +1,13 @@
-/include/*
-!/include/InSDL
+*.h
 *.exe
 /src/build
 __pycache__
+*.pyc
 *.cpp
 !main.cpp
 img.bmp
 font.ttf
+!include/InSDL/font.ttf
 audio.wav
+.vscode/*.json
+!.vscode/tasks.json

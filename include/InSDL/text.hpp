@@ -18,10 +18,10 @@ class text {
             string path;
         };
 
-        textData data;
         SDL_Renderer *Render;
-
     public:
+        textData data;
+    
         text(SDL_Renderer *render, const string& text, string fontpath, Uint8 r = 255, Uint8 g = 255, Uint8 b = 255) {
             data.color = {r, g, b, 255};
             data.font = TTF_OpenFont(fontpath.c_str(), 128);
