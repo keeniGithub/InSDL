@@ -6,7 +6,12 @@
 
 using namespace std;
 
-/* only for processing the exit */
+/**
+ * @note Not used
+ * @brief Handles the application quit event
+ *  
+ * @param app Reference to your application object
+ */
 void exitEvent(app& app) {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
@@ -16,7 +21,14 @@ void exitEvent(app& app) {
     }
 }
 
-/* to process everything */
+/**
+ * @brief Handles all main SDL events related to input and quitting
+ * 
+ * Processes quit events, key down/up events, mouse button presses, and mouse motion.
+ * Calls the corresponding bound functions from the app object when events are detected.
+ * 
+ * @param app Reference to your application object
+ */
 void handleEvent(app& app) {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
